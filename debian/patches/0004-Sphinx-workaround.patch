@@ -1,0 +1,27 @@
+From: Debian Python Modules Team
+ <python-modules-team@lists.alioth.debian.org>
+Date: Sun, 17 Nov 2019 15:23:56 -0500
+Subject: Sphinx-workaround
+
+Remove NEWS to work around build bug with python3-sphinx
+
+reading sources... [ 72%] news
+
+Exception occurred:
+  File "/usr/lib/python3/dist-packages/docutils/parsers/rst/states.py", line 883, in interpreted
+    nodes[0][0].rawsource = unescape(text, True)
+AttributeError: 'str' object has no attribute 'rawsource'
+---
+ doc/src/news.rst | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/doc/src/news.rst b/doc/src/news.rst
+index 053d646..fa76a09 100644
+--- a/doc/src/news.rst
++++ b/doc/src/news.rst
+@@ -5,4 +5,4 @@
+ Release notes
+ =============
+ 
+-.. include:: ../../NEWS
++See /usr/share/doc/python3-sphinx/changelog.gz for upstream release notes.

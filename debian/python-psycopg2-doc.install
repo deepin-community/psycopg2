@@ -1,0 +1,3 @@
+doc/pep-0249.txt usr/share/doc/python-psycopg2-doc/
+doc/src/_build/html usr/share/doc/python-psycopg2-doc/
+doc/src/_build/text usr/share/doc/python-psycopg2-doc/

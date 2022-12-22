@@ -1,0 +1,11 @@
+Document: psycopg2
+Title: Psycopg2 Reference and API Documentation
+Author: Daniele Varrazzo
+Abstract: Psycopg2 is a Python module for PostgreSQL
+ This documentation contains a general reference of
+ Psycopg2 together with an API documentation
+Section: Programming/Python
+
+Format: HTML
+Index: /usr/share/doc/python-psycopg2-doc/html/index.html
+Files: /usr/share/doc/python-psycopg2-doc/html/*.html

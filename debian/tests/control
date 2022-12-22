@@ -1,0 +1,3 @@
+Depends: @, postgresql-all, python3-all:any, python3-all-dbg
+Tests: unittest
+Restrictions: allow-stderr

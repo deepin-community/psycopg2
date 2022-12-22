@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -eux
+
+for PG in $(/usr/share/postgresql-common/supported-versions); do
+  for PY in $(py3versions --supported); do
+    for PYTHON in $PY $PY-dbg; do
+      echo "### PostgreSQL $PG, $PYTHON ###"
+      LANG=C.UTF-8 LC_ALL=C.UTF-8 \
+      PSYCOPG2_TESTDB_HOST=localhost \
+      PSYCOPG2_TESTDB=postgres \
+      PSYCOPG2_TEST_FAST=1 \
+      pg_virtualenv -v $PG \
+        $PYTHON -c "import tests; tests.unittest.main(defaultTest='tests.test_suite')" --verbose
+    done
+  done
+done

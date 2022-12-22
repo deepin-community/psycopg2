@@ -1,0 +1,21 @@
+From: Nicolas Dandrimont <olasd@debian.org>
+Date: Wed, 4 Sep 2019 10:33:18 +0200
+Subject: Use buildsystem python to build documentation
+
+---
+ doc/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/doc/Makefile b/doc/Makefile
+index 4b2752b..04948a9 100644
+--- a/doc/Makefile
++++ b/doc/Makefile
+@@ -19,7 +19,7 @@ html: package src/sqlstate_errors.rst
+ 	cp -r src/_build/html .
+ 
+ src/sqlstate_errors.rst: ../psycopg/sqlstate_errors.h $(BUILD_DIR)
+-	env/bin/python src/tools/make_sqlstate_docs.py $< > $@
++	$(PYTHON) src/tools/make_sqlstate_docs.py $< > $@
+ 
+ $(BUILD_DIR):
+ 	$(MAKE) PYTHON=$(PYTHON) -C .. package

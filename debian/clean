@@ -1,0 +1,3 @@
+build/
+doc/src/_build/
+doc/src/sqlstate_errors.rst

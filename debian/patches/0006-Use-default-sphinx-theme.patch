@@ -1,0 +1,49 @@
+From: Scott Kitterman <scott@kitterman.com>
+Date: Wed, 8 Apr 2020 01:12:18 -0400
+Subject: Use default sphinx theme
+
+---
+ doc/src/conf.py | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/doc/src/conf.py b/doc/src/conf.py
+index b4baa0e..7a530f1 100644
+--- a/doc/src/conf.py
++++ b/doc/src/conf.py
+@@ -12,7 +12,7 @@
+ 
+ import os
+ import sys
+-from better import better_theme_path
++#from better import better_theme_path
+ 
+ # If extensions (or modules to document with autodoc) are in another directory,
+ # add these directories to sys.path here. If the directory is relative to the
+@@ -135,7 +135,7 @@ rst_epilog = """
+ 
+ # The theme to use for HTML and HTML Help pages.  Major themes that come with
+ # Sphinx are currently 'default' and 'sphinxdoc'.
+-html_theme = 'better'
++html_theme = 'default'
+ 
+ # The stylesheet to use with HTML output: this will include the original one
+ # adding a few classes.
+@@ -147,13 +147,13 @@ html_show_sphinx = False
+ # Theme options are theme-specific and customize the look and feel of a theme
+ # further.  For a list of options available for each theme, see the
+ # documentation.
+-html_theme_options = {
+-    'linktotheme': False,
+-    'cssfiles': ['_static/psycopg.css'],
+-}
++#html_theme_options = {
++#    'linktotheme': False,
++#    'cssfiles': ['_static/psycopg.css'],
++#}
+ 
+ # Add any paths that contain custom themes here, relative to this directory.
+-html_theme_path = [better_theme_path]
++#html_theme_path = [better_theme_path]
+ 
+ # The name for this set of Sphinx documents.  If None, it defaults to
+ # "<project> v<release> documentation".

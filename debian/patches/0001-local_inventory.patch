@@ -1,0 +1,25 @@
+From: SVN-Git Migration <python-modules-team@lists.alioth.debian.org>
+Date: Thu, 8 Oct 2015 10:17:29 -0700
+Subject: local_inventory
+
+Use local copies of object.inv for building documentation.
+Doesn't need forwarding.
+Patch by Scott Kitterman <scott@kitterman.com> Feb 2, 2012
+Patch-Name: local_inventory
+---
+ doc/src/conf.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/doc/src/conf.py b/doc/src/conf.py
+index c40c493..b4baa0e 100644
+--- a/doc/src/conf.py
++++ b/doc/src/conf.py
+@@ -69,7 +69,7 @@ else:
+     release = psycopg2.__version__.split()[0]
+     version = '.'.join(release.split('.')[:2])
+ 
+-intersphinx_mapping = {'py': ('https://docs.python.org/3', None)}
++intersphinx_mapping = {'py': ('/usr/share/doc/python3-doc/html', None)}
+ 
+ # Pattern to generate links to the bug tracker
+ ticket_url = 'https://github.com/psycopg/psycopg2/issues/%s'
