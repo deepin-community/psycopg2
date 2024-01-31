@@ -1,3 +1,80 @@
+psycopg2 (2.9.9-1) unstable; urgency=medium
+
+  * New upstream version 2.9.9.
+
+ -- Christoph Berg <myon@debian.org>  Sat, 25 Nov 2023 16:21:37 +0000
+
+psycopg2 (2.9.6-3) unstable; urgency=medium
+
+  * Fix test_ssl_attribute test when compiled with and run against PG15, but
+    when libpq5 is already PG16.
+
+ -- Christoph Berg <myon@debian.org>  Mon, 11 Sep 2023 14:12:41 +0000
+
+psycopg2 (2.9.6-2) unstable; urgency=medium
+
+  [ Scott Kitterman ]
+  * Remove myself from uploaders
+
+  [ Christoph Berg ]
+  * Disable test_ssl_attribute on PG16+.
+
+ -- Christoph Berg <myon@debian.org>  Sun, 02 Jul 2023 12:59:03 +0200
+
+psycopg2 (2.9.6-1) experimental; urgency=medium
+
+  * New upstream version 2.9.6.
+  * debian/watch: Accept '.' in tag names.
+
+ -- Christoph Berg <myon@debian.org>  Mon, 29 May 2023 11:11:37 +0200
+
+psycopg2 (2.9.5-1) unstable; urgency=medium
+
+  * New upstream version 2.9.5
+
+ -- Bastian Germann <bage@debian.org>  Fri, 27 Jan 2023 21:28:29 +0100
+
+psycopg2 (2.9.4-2) unstable; urgency=medium
+
+  [ Debian Janitor ]
+  * Trim trailing whitespace.
+  * Fix day-of-week for changelog entry 1.1.17-1.
+  * Update standards version to 4.6.1, no changes needed.
+
+ -- Jelmer Vernooĳ <jelmer@debian.org>  Sat, 22 Oct 2022 11:15:04 +0100
+
+psycopg2 (2.9.4-1) unstable; urgency=medium
+
+  * New upstream version 2.9.4.
+  * Point watch file at GitHub tags instead of pypi.
+
+ -- Christoph Berg <myon@debian.org>  Thu, 06 Oct 2022 11:10:44 +0200
+
+psycopg2 (2.9.3-1) unstable; urgency=medium
+
+  * New upstream version 2.9.3.
+
+ -- Christoph Berg <myon@debian.org>  Wed, 10 Aug 2022 10:08:12 +0200
+
+psycopg2 (2.9.2-2) unstable; urgency=medium
+
+  [ Debian Janitor ]
+  * Remove constraints unnecessary since buster:
+    + Build-Depends: Drop versioned constraint on python3-sphinx.
+
+ -- Jelmer Vernooĳ <jelmer@debian.org>  Fri, 27 May 2022 19:36:39 +0100
+
+psycopg2 (2.9.2-1) unstable; urgency=medium
+
+  * New upstream release
+    - Refresh patches
+    - Delete d/p/0002-failing-tests.patch: test passes on AMD64, need archive
+      build to determine if there are any problematic archs anymore
+    - Delete d/p/0004-Sphinx-workaround.patch and d/p/0005-Sphinx-no-spanning-
+      cells.patch as doc build now succeeds without them
+
+ -- Scott Kitterman <scott@kitterman.com>  Mon, 20 Dec 2021 16:28:10 -0500
+
 psycopg2 (2.9.1-1) unstable; urgency=medium
 
   * New upstream version 2.9.1
@@ -694,7 +771,7 @@ psycopg (1.1.17-1) unstable; urgency=high
   * Urgency is still high because 1.1.16 was never uploaded.
   * New upstream release.
 
- -- Federico Di Gregorio <fog@debian.org>  Thu, 19 Nov 2004 01:14:30 +0200
+ -- Federico Di Gregorio <fog@debian.org>  Fri, 19 Nov 2004 01:14:30 +0200
 
 psycopg (1.1.16-1) unstable; urgency=high
 

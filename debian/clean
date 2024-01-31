@@ -1,3 +1,7 @@
 build/
 doc/src/_build/
 doc/src/sqlstate_errors.rst
+psycopg2.egg-info/PKG-INFO
+psycopg2.egg-info/SOURCES.txt
+psycopg2.egg-info/dependency_links.txt
+psycopg2.egg-info/top_level.txt

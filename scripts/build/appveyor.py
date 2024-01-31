@@ -321,14 +321,10 @@ def patch_package_name():
 
 
 def build_binary_packages():
-    """Create wheel/exe binary packages."""
+    """Create wheel binary packages."""
     os.chdir(opt.package_dir)
 
     add_pg_config_path()
-
-    # Build .exe packages for whom still use them
-    if opt.package_name == 'psycopg2':
-        run_python(['setup.py', 'bdist_wininst', "-d", opt.dist_dir])
 
     # Build .whl packages
     run_python(['setup.py', 'bdist_wheel', "-d", opt.dist_dir])
@@ -659,9 +655,12 @@ class Options:
 
     @property
     def py_ver(self):
-        """The Python version to build as 2 digits string."""
+        """The Python version to build as 2 digits string.
+
+        For large values of 2, occasionally.
+        """
         rv = os.environ['PY_VER']
-        assert rv in ('36', '37', '38', '39'), rv
+        assert rv in ('37', '38', '39', '310', '311', "312"), rv
         return rv
 
     @property
@@ -743,10 +742,12 @@ class Options:
         # Py 3.6--3.8 = VS Ver. 14.0 (VS 2015)
         # Py 3.9 = VS Ver. 16.0 (VS 2019)
         vsvers = {
-            '36': '14.0',
             '37': '14.0',
             '38': '14.0',
             '39': '16.0',
+            '310': '16.0',
+            '311': '16.0',
+            '312': '16.0',
         }
         return vsvers[self.py_ver]
 

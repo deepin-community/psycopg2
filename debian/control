@@ -8,15 +8,14 @@ Build-Depends:
  postgresql,
  python3-all-dev:any,
  python3-setuptools,
- python3-sphinx (>= 1.0.7+dfsg-1~),
+ python3-sphinx,
 Build-Depends-Indep: python3-doc
 Maintainer: Debian Python Team <team+python@tracker.debian.org>
 Uploaders:
  Fabio Tranchitella <kobold@debian.org>,
- Scott Kitterman <scott@kitterman.com>,
  Christoph Berg <myon@debian.org>,
  Tomasz Rybak <serpent@debian.org>,
-Standards-Version: 4.6.0
+Standards-Version: 4.6.1
 Rules-Requires-Root: no
 Vcs-Git: https://salsa.debian.org/python-team/packages/psycopg2.git
 Vcs-Browser: https://salsa.debian.org/python-team/packages/psycopg2

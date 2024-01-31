@@ -36,15 +36,12 @@ from distutils.command.build_ext import build_ext
 from distutils.ccompiler import get_default_compiler
 from distutils.errors import CompileError
 
-try:
-    import configparser
-except ImportError:
-    import ConfigParser as configparser
+import configparser
 
 # Take a look at https://www.python.org/dev/peps/pep-0440/
 # for a consistent versioning pattern.
 
-PSYCOPG_VERSION = '2.9.1'
+PSYCOPG_VERSION = '2.9.9'
 
 
 # note: if you are changing the list of supported Python version please fix
@@ -55,10 +52,12 @@ Intended Audience :: Developers
 License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)
 Programming Language :: Python
 Programming Language :: Python :: 3
-Programming Language :: Python :: 3.6
 Programming Language :: Python :: 3.7
 Programming Language :: Python :: 3.8
 Programming Language :: Python :: 3.9
+Programming Language :: Python :: 3.10
+Programming Language :: Python :: 3.11
+Programming Language :: Python :: 3.12
 Programming Language :: Python :: 3 :: Only
 Programming Language :: Python :: Implementation :: CPython
 Programming Language :: C
@@ -103,24 +102,23 @@ For further information please check the 'doc/src/install.rst' file (also at
 """)
             sys.exit(1)
 
-    def query(self, attr_name):
+    def query(self, attr_name, *, empty_ok=False):
         """Spawn the pg_config executable, querying for the given config
         name, and return the printed value, sanitized. """
         try:
-            pg_config_process = subprocess.Popen(
+            pg_config_process = subprocess.run(
                 [self.pg_config_exe, "--" + attr_name],
-                stdin=subprocess.PIPE,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE)
         except OSError:
             raise Warning(
                 f"Unable to find 'pg_config' file in '{self.pg_config_exe}'")
-        pg_config_process.stdin.close()
-        result = pg_config_process.stdout.readline().strip()
-        if not result:
-            raise Warning(pg_config_process.stderr.readline())
-        if not isinstance(result, str):
-            result = result.decode('ascii')
+        if pg_config_process.returncode:
+            err = pg_config_process.stderr.decode(errors='backslashreplace')
+            raise Warning(f"pg_config --{attr_name} failed: {err}")
+        result = pg_config_process.stdout.decode().strip()
+        if not result and not empty_ok:
+            raise Warning(f"pg_config --{attr_name} is empty")
         return result
 
     def find_on_path(self, exename, path_directories=None):
@@ -160,10 +158,7 @@ For further information please check the 'doc/src/install.rst' file (also at
         return None
 
     def _get_pg_config_from_registry(self):
-        try:
-            import winreg
-        except ImportError:
-            import _winreg as winreg
+        import winreg
 
         reg = winreg.ConnectRegistry(None, winreg.HKEY_LOCAL_MACHINE)
         try:
@@ -376,12 +371,14 @@ For further information please check the 'doc/src/install.rst' file (also at
             self.include_dirs.append(pg_config_helper.query("includedir"))
             self.include_dirs.append(pg_config_helper.query("includedir-server"))
 
-            # add includedirs from cppflags, libdirs from ldflags
-            for token in pg_config_helper.query("ldflags").split():
+            # if present, add includedirs from cppflags, libdirs from ldflags
+            tokens = pg_config_helper.query("ldflags", empty_ok=True).split()
+            for token in tokens:
                 if token.startswith("-L"):
                     self.library_dirs.append(token[2:])
 
-            for token in pg_config_helper.query("cppflags").split():
+            tokens = pg_config_helper.query("cppflags", empty_ok=True).split()
+            for token in tokens:
                 if token.startswith("-I"):
                     self.include_dirs.append(token[2:])
 
@@ -550,11 +547,11 @@ setup(name="psycopg2",
       author="Federico Di Gregorio",
       author_email="fog@initd.org",
       maintainer="Daniele Varrazzo",
-      maintainer_email="daniele.varrazzo@gmail.org",
+      maintainer_email="daniele.varrazzo@gmail.com",
       url="https://psycopg.org/",
       license="LGPL with exceptions",
       platforms=["any"],
-      python_requires='>=3.6',
+      python_requires='>=3.7',
       description=readme.split("\n")[0],
       long_description="\n".join(readme.split("\n")[2:]).lstrip(),
       classifiers=[x for x in classifiers.split("\n") if x],

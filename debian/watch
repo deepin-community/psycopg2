@@ -1,3 +1,4 @@
 version=4
-opts=pgpmode=auto \
-https://pypi.debian.net/psycopg2/psycopg2-([0-9][0-9\.\-]*).tar.gz 
+opts=pgpmode=auto,uversionmangle=s/_/./g \
+https://github.com/psycopg/psycopg2/tags .*/([0-9._]*).tar.gz
+#https://pypi.debian.net/psycopg2/psycopg2-([0-9][0-9\.\-]*).tar.gz
