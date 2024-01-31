@@ -1,6 +1,3 @@
 0001-local_inventory.patch
-0002-failing-tests.patch
 0003-Use-buildsystem-python-to-build-documentation.patch
-0004-Sphinx-workaround.patch
-0005-Sphinx-no-spanning-cells.patch
 0006-Use-default-sphinx-theme.patch

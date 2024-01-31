@@ -111,6 +111,7 @@
 {"2203D", "TooManyJsonArrayElements"},
 {"2203E", "TooManyJsonObjectMembers"},
 {"2203F", "SqlJsonScalarRequired"},
+{"2203G", "SqlJsonItemCannotBeCastToTargetType"},
 {"22P01", "FloatingPointException"},
 {"22P02", "InvalidTextRepresentation"},
 {"22P03", "InvalidBinaryRepresentation"},
@@ -279,6 +280,7 @@
 {"57P02", "CrashShutdown"},
 {"57P03", "CannotConnectNow"},
 {"57P04", "DatabaseDropped"},
+{"57P05", "IdleSessionTimeout"},
 
 /* Class 58 - System Error (errors external to PostgreSQL itself) */
 {"58000", "SystemError"},

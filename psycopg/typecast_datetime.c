@@ -71,7 +71,6 @@ typecast_PYDATE_cast(const char *str, Py_ssize_t len, PyObject *curs)
             return NULL;
         }
         else {
-            if (y > 9999) y = 9999;
             obj = PyObject_CallFunction(
                 (PyObject*)PyDateTimeAPI->DateType, "iii", y, m, d);
         }
@@ -104,18 +103,8 @@ _parse_inftz(const char *str, PyObject *curs)
         goto exit;
     }
 
-#if PY_VERSION_HEX < 0x03070000
-    {
-        PyObject *tzoff;
-        if (!(tzoff = PyDelta_FromDSU(0, 0, 0))) { goto exit; }
-        tzinfo = PyObject_CallFunctionObjArgs(tzinfo_factory, tzoff, NULL);
-        Py_DECREF(tzoff);
-        if (!tzinfo) { goto exit; }
-    }
-#else
     tzinfo = PyDateTime_TimeZone_UTC;
     Py_INCREF(tzinfo);
-#endif
 
     /* m.replace(tzinfo=tzinfo) */
     if (!(args = PyTuple_New(0))) { goto exit; }
@@ -172,8 +161,6 @@ _parse_noninftz(const char *str, Py_ssize_t len, PyObject *curs)
         mm += 1;
         ss -= 60;
     }
-    if (y > 9999)
-        y = 9999;
 
     tzinfo_factory = ((cursorObject *)curs)->tzinfo_factory;
     if (n >= 5 && tzinfo_factory != Py_None) {
@@ -181,11 +168,6 @@ _parse_noninftz(const char *str, Py_ssize_t len, PyObject *curs)
            appropriate tzinfo object calling the factory */
         Dprintf("typecast_PYDATETIMETZ_cast: UTC offset = %ds", tzsec);
 
-#if PY_VERSION_HEX < 0x03070000
-        /* Before Python 3.7 the timezone offset had to be a whole number
-         * of minutes, so round the seconds to the closest minute */
-        tzsec = 60 * (int)round(tzsec / 60.0);
-#endif
         if (!(tzoff = PyDelta_FromDSU(0, tzsec, 0))) { goto exit; }
         if (!(tzinfo = PyObject_CallFunctionObjArgs(
                 tzinfo_factory, tzoff, NULL))) {
@@ -273,11 +255,6 @@ typecast_PYTIME_cast(const char *str, Py_ssize_t len, PyObject *curs)
            appropriate tzinfo object calling the factory */
         Dprintf("typecast_PYTIME_cast: UTC offset = %ds", tzsec);
 
-#if PY_VERSION_HEX < 0x03070000
-        /* Before Python 3.7 the timezone offset had to be a whole number
-         * of minutes, so round the seconds to the closest minute */
-        tzsec = 60 * (int)round(tzsec / 60.0);
-#endif
         if (!(tzoff = PyDelta_FromDSU(0, tzsec, 0))) { goto exit; }
         if (!(tzinfo = PyObject_CallFunctionObjArgs(tzinfo_factory, tzoff, NULL))) {
             goto exit;

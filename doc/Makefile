@@ -8,7 +8,7 @@ check: doctest
 # It is not clean by 'make clean'
 
 PYTHON := python$(PYTHON_VERSION)
-PYTHON_VERSION ?= $(shell $(PYTHON) -c 'import sys; print ("%d.%d" % sys.version_info[:2])')
+PYTHON_VERSION ?= $(shell $(PYTHON) -c 'import sys; print("%d.%d" % sys.version_info[:2])')
 BUILD_DIR = $(shell pwd)/../build/lib.$(PYTHON_VERSION)
 
 SPHINXBUILD ?= $$(pwd)/env/bin/sphinx-build
@@ -19,7 +19,7 @@ html: package src/sqlstate_errors.rst
 	cp -r src/_build/html .
 
 src/sqlstate_errors.rst: ../psycopg/sqlstate_errors.h $(BUILD_DIR)
-	env/bin/python src/tools/make_sqlstate_docs.py $< > $@
+	./env/bin/python src/tools/make_sqlstate_docs.py $< > $@
 
 $(BUILD_DIR):
 	$(MAKE) PYTHON=$(PYTHON) -C .. package
@@ -33,7 +33,7 @@ clean:
 	rm -rf html src/sqlstate_errors.rst
 
 env: requirements.txt
-	virtualenv -p $(PYTHON) env
+	$(PYTHON) -m venv env
 	./env/bin/pip install -r requirements.txt
 	echo "$$(pwd)/../build/lib.$(PYTHON_VERSION)" \
 		> env/lib/python$(PYTHON_VERSION)/site-packages/psycopg.pth

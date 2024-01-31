@@ -31,7 +31,7 @@ wheel_ package available on PyPI_:
 
 This will install a pre-compiled binary version of the module which does not
 require the build or runtime prerequisites described below. Make sure to use
-an up-date-date version of :program:`pip` (you can upgrade it using something
+an up-to-date version of :program:`pip` (you can upgrade it using something
 like ``pip install -U pip``).
 
 You may then import the ``psycopg2`` package, as usual:
@@ -131,10 +131,17 @@ The current `!psycopg2` implementation supports:
 ..
     NOTE: keep consistent with setup.py and the /features/ page.
 
-- Python versions from 3.6 to 3.9
-- PostgreSQL server versions from 7.4 to 13
+- Python versions from 3.7 to 3.12
+- PostgreSQL server versions from 7.4 to 16
 - PostgreSQL client library version from 9.1
 
+.. note::
+
+    Not all the psycopg2 versions support all the supported Python versions.
+
+    Please see the :ref:`release notes <news>` to verify when the support for
+    a new Python version was added and when the support for an old Python
+    version was removed.
 
 
 .. _build-prerequisites:
@@ -198,7 +205,7 @@ self-contained wheel package, it will need the libpq_ library at runtime
 (usually distributed in a ``libpq.so`` or ``libpq.dll`` file).  `!psycopg2`
 relies on the host OS to find the library if the library is installed in a
 standard location there is usually no problem; if the library is in a
-non-standard location you will have to tell somehow Psycopg how to find it,
+non-standard location you will have to tell Psycopg how to find it,
 which is OS-dependent (for instance setting a suitable
 :envvar:`LD_LIBRARY_PATH` on Linux).
 
